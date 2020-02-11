@@ -1,0 +1,41 @@
+For my project, I will analyze my data a little different than most. 
+
+I will be using machine learning and reconstruction procedures to analyze my data. 
+
+First, I will collect the data which will be behavioral (rating how similar 2 faces look) and EEG data (a simple go/no-go
+task looking at faces). Then, I will create a confusability matrix which will be my input in order to reconstruct the faces.
+
+During the experiments, reaction time, stnadard deviation, median, and mean scores of face ratings will be recorded. 
+
+The pipeline for reconstruction is as follows: 
+
+First, a systematic leave-one-out procedure will be conducted whereby a confusability matrix will be computed which contains the average pairwise similarity of n-1 faces. 
+
+Second, the face that was left out will be projected into a face space based on its behavioral similarity relative to the other faces. 
+
+This will be done by estimating the face space by applying a metric multidimensional scaling to the confusability matrix for each participant, 
+followed by z-scoring in order to normalize each dimension. Third, I will derive classification images for each dimension to assess whether relevant visual information is included. 
+
+This will be accomplished by deploying a reverse correlation analogue to compute a weighted average of faces that is proportional with their coordination. 
+The assessment of classification image significance will be accomplished through pixelwise permutation testing, which randomizes images relative to their coordinates on each dimension. 
+
+Then, the face space will have the target face projected onto it based on its similarity with the n-1 faces. 
+
+Finally, reconstruction of target face appearance will be conducted through linear combination of significant classification images added onto an average face image derived from 
+linearly combining the original n-1 faces (Change et al, 2017). 
+
+Once reconstruction is successful, evaluation of reconstruction results will depend on accuracy. 
+Accuracy will be measured as the pixelwise similarity of reconstructed images relative to the target faces. 
+In other words, this is an estimation of the percentage of instances a reconstructed image is closer, via a Euclidean metric, to its relative target,
+compared to any other target face. Finally, the average of reconstruction accuracies across all faces (for each participant) will be tested for chance-level significance (50%) 
+using a one-sample t-test. 
+
+Machine learning will be accomplished using support vector machines (SVMs).
+
+SVMs are a method of classification that uses the features extracted from training data to accurately classify the test data.
+We are using leave-one-out cross validation whereby 29 of the 30 observations of each face are used as training data, and the final observation is used as test data to test if 
+the algorithm can correctly categorize the stimuli. 
+
+Pairwise comparison is used where the algorithm compares one face with another, and this is done with all combinations of the 30 faces. 
+Pattern classification was conducted across ERP traces corresponding to the 30 stimuli across multiple electrodes. 
+Once pattern classification is done, visual features were derived and evaluated for the presence of significant information
